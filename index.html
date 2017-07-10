@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Concentric</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        
+        <script src="js/angular.min.js"></script>
+        <script src="js/underscore.js"></script>
+        <script src="app/app.js"></script>
+        
+        <script src="app/controllers/stockItemsController.js"></script>
+        <script src="http://dmifsud.github.io/angular-training/fixed-assets/angular-third-party-module.js"></script>
+    </head>
+    <body ng-app="stockItems">
+        <div class="container">
+        <div ng-controller="StockItemsController">
+        <h2 class="text-center title">Invoice</h2>
+
+            <div class="row">
+            <div class="col-md-12">
+                <div class="subtitle">In Stock</div>
+                <hr>
+                <div ng-repeat="item in stockItems" class="col-md-4" ng-click="addItemInReceipt(item);" ng-if="item.id!=undefined">
+                <!-- && -->
+                    <fieldset class="item" ng-disabled="item.qty == 0">
+                        <div class="item-property"><strong>{{item.name}}</strong></div>
+                        <div class="item-property" ng-if="item.qty > 0">Qty: {{item.qty}}</div>
+                        <div class="item-property" ng-if="item.qty == 0">This item is out of stock!</div>
+                    </fieldset>
+                </div>
+            </div>
+
+
+            <div class="col-md-12" ng-if="receiptItems.length != 0">
+                <div class="subtitle">Receipt</div>
+                <hr>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in receiptItems track by $index">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.price * item.qty}}</td>
+                        <td>{{item.qty}}</td>
+                        <td>
+                            <button class="btn btn-info" ng-click="addItemInReceipt(item)" ng-disabled="item.outOfStock==true">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-info" ng-click="removeItemFromReceipt(item.id)" ng-if="item.qty>1">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-danger" ng-click="deleteItemFromReceipt(index)" ng-if="item.qty==1">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"><strong>Total: &#8364;{{totalPrice}}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            </div>
+
+        </div>
+        </div>
+    </body>
+</html>

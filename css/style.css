@@ -1,0 +1,30 @@
+body{
+	font: 400 16px 'Muli','Helvetica Neue','Segoe UI','Helvetica','Arial',sans-serif;
+}
+
+.item{
+	background-color: #31b0d5;
+	opacity: 0.75;
+	color: #ffffff;
+	padding: 15px;
+	margin: 5px;
+	border-radius: 5px;
+	border: 1px solid #269abc;
+	cursor: pointer;
+}
+
+.title{
+	color: rgba(0,0,0,0.54);
+	font-weight: bold;
+	font-size: 18pt;
+}
+
+.subtitle{
+	color: rgba(0,0,0,0.54);
+	font-size: 16pt;
+}
+
+.btn-item{
+	width: 30px;
+	height: 30px;
+}
